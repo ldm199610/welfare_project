@@ -50,7 +50,7 @@
 				);
 			},
 			getIndex_state(){
-				const data={_userid:"16990114482261",_token:"cfe43c17f4decdac8cbd284ecf89099c",content:"18"};
+				const data={_userid:"16990114482261",_token:"5d9e70500fedf0eca4654c7ae44222ec",content:"18"};
 				getData(data).then(res=>{
 					console.log(res);
 				});
