@@ -42,3 +42,24 @@
         }, false);
     }
 })(750,2000);
+// 获取token和id
+export function getUrl(){
+	// var url = url_search;
+	let url='?_token=5d9e70500fedf0eca4654c7ae44222ec&_userid=16990114482261';
+	if(url.indexOf('?')!=-1){
+		let url_obj=new Object;
+		const str=url.substr(1);
+		const arr=str.split('&');
+		for(let i=0;i<arr.length;i++){
+			let array=arr[i].split('=');
+			url_obj[array[0]]=array[1];
+			array=null;
+		}
+	  sessionStorage.setItem("userid",url_obj['_userid']);
+	  sessionStorage.setItem("token", url_obj['_token']);
+		return url_obj
+	}else{
+		return false
+	}
+	url=null;
+}

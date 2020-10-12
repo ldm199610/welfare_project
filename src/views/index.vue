@@ -18,7 +18,7 @@
 <script>
 	// @ is an alias to /src
 	// import HelloWorld from "@/components/HelloWorld.vue";
-	// import {getData} from "../api/index";
+	import {getWelfareData} from "../api/index";
 	export default {
 		name: "Index",
 		// components: {
@@ -34,11 +34,15 @@
 					loop: true,
 					speed: 500,
 					direction: 'vertical',
-				}
+					observer:true,//修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true//修改swiper的父元素时，自动初始化swiper
+				},
+				welfare_data:{}
 			}
 		},
 		mounted() {
-			// this.getIndex_state();
+			this.getIndex_state();
+			// this.get_state();
 		},
 		methods: {
 			copyFn() {
@@ -51,16 +55,21 @@
 				);
 			},
 			getIndex_state(){
-				const data={_userid:"16990114482261",_token:"cfe43c17f4decdac8cbd284ecf89099c",content:"18"};
-				getData(data).then(res=>{
-					console.log(res);
+				getWelfareData().then(res=>{
+					this.welfare_data=res.data;
+					console.log(this.welfare_data);
 				});
-			}
+			},
+			// get_state(){
+			// 	const data={content:"111"};
+			// 	getData(data).then(res=>{
+			// 		console.log(res);
+			// 	});
+			// }
 		}
 	};
 </script>
-<style scoped lang="scss">
-	.swiper-container {
-		height: 0.6rem;
-	}
+
+<style scoped src="../assets/css/index.css">
+
 </style>

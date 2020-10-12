@@ -1,0 +1,43 @@
+.header{
+	width: 100%;
+	height: 6.96rem;
+	padding-top: 0.16rem;
+	background: url(../img/banner1.png) no-repeat,url(../img/banner2.png) no-repeat,url(../img/banner3.png) no-repeat;
+	background-size: contain;
+	background-position:0 0,0 0.94rem,0 3.86rem;
+	position: relative;
+	.swiper-container{
+		width: 6.30rem;
+		height:0.5rem;
+		margin: 0 auto;
+		border-radius: 0.25rem;
+		background-color: #ffe1c2;
+		font-size: 0.24rem;
+		img{
+			width: 0.26rem;
+			height: 0.24rem;
+		}
+		.swiper-slide{
+			padding: 0 0.18rem;
+			a{
+				margin-left: 0.16rem;
+			}
+		}
+	 }
+	 .my_gold{
+		 color: #FFFFFF;
+		 font-size: 0.28rem;
+		 position: absolute;
+		 bottom: 0.76rem;
+		 left: 0.65rem;
+		 img{
+			 width: 0.26rem;
+			 height: 0.26rem;
+			 margin-left: 0.09rem;
+		 }
+		 .gold{
+			 width: 1.52rem;
+			 margin-bottom: 0.12rem;
+		 }
+		 }
+}
