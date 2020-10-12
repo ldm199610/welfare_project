@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Qs from 'qs';
-
+import {getUrl} from './common.js';
+const url_obj=getUrl();
 axios.defaults.timeout = 5000;
 // axios.defaults.baseURL = 'https://setting.qtonghua.com';
 
@@ -8,7 +9,9 @@ axios.defaults.timeout = 5000;
 const server = axios.create({
   baseURL:'/',
   headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+	  // 'token':'5d9e70500fedf0eca4654c7ae44222ec',
+	  // 'userid':"16990114482261"
       //'Content-Type': 'application/multipart/form-data'
   },
   transformRequest: function(data, header){
@@ -22,24 +25,24 @@ server.interceptors.request.use(
   config => {
 //     const token = getCookie('名称');        //注意使用的时候需要引入cookie方法，推荐js-cookie
          // config.data = JSON.stringify(config.data);
-//     if(token){
-//       config.params = {'token':token}
-//     }
     let method = config.method;
     let datas;
+	console.log(config);
     if (method == 'post') {
         datas = config.data || {};
+		if(!datas._userid){
+			datas._userid=url_obj._userid;
+			datas._token=url_obj._token;
+			config.data=datas;
+		}
     } else if (method == 'get') {
         datas = config.params || {};
+		if(!datas._userid){
+			datas._userid=url_obj._userid;
+			datas._token=url_obj._token;
+			config.params=datas;
+		}
     };
-    // 需要和app共享登录态开启
-    // if (method == 'post') {
-    //     datas = config.data || {}
-    //         config.data = datas
-    // } else if (method == 'get') {
-    //     datas = config.params || {}
-    //         config.params = datas
-    // }
     return config
   },
   error => {
@@ -57,7 +60,7 @@ server.interceptors.response.use(
         querry: {redirect: router.currentRoute.fullPath}// 从哪个页面跳转
       })
     }
-    return response;
+    return response.data;
   },
   error => {
     console.log('错误');

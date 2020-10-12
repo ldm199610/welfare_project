@@ -1,23 +1,36 @@
 <template>
-	<div class="home">
-		<!--    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-		<swiper :options="couponSwiperOption">
-			<swiper-slide v-for='index in 5' :key='index'>
-				<a>
-					我是李子建{{index}}
-				</a>
-			</swiper-slide>
-		</swiper>
-		<div class="swiper-scrollbar on"></div>
-		<div @click="copyFn()">点击复制</div>
+	<div id="index">
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+		<!-- 
+		<ul>
+			<li v-for='(item,key) in welfare_data.make_money_rank' :key='key'>
+				{{item.nick_name}}
+			</li>
+		</ul>
+		<div @click="copyFn()">点击复制</div> -->
+		<div class="header">
+			<swiper :options="couponSwiperOption" v-if='welfare_data.make_money_des!=undefined'>
+				<swiper-slide v-for='(item,key) in welfare_data.make_money_des' :key='key' class='flex align-Center'>
+					<img src="../assets/img/notice.png"/>
+					<a class="flex_1">
+						{{item.label}}
+					</a>
+				</swiper-slide>
+			</swiper>
+			<div class="my_gold flex align-Center flex-column">
+				<p class="gold text_over">999999</p>
+				<div class="flex align-Center">
+					元<img src="../assets/img/arrow.png"/>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 	// @ is an alias to /src
 	// import HelloWorld from "@/components/HelloWorld.vue";
-	import {getData} from "../api/index";
+	import {getWelfareData} from "../api/index";
 	export default {
 		name: "Index",
 		// components: {
@@ -33,11 +46,15 @@
 					loop: true,
 					speed: 500,
 					direction: 'vertical',
-				}
+					observer:true,//修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true//修改swiper的父元素时，自动初始化swiper
+				},
+				welfare_data:{}
 			}
 		},
 		mounted() {
 			this.getIndex_state();
+			// this.get_state();
 		},
 		methods: {
 			copyFn() {
@@ -50,16 +67,21 @@
 				);
 			},
 			getIndex_state(){
-				const data={_userid:"16990114482261",_token:"cfe43c17f4decdac8cbd284ecf89099c",content:"18"};
-				getData(data).then(res=>{
-					console.log(res);
+				getWelfareData().then(res=>{
+					this.welfare_data=res.data;
+					console.log(this.welfare_data);
 				});
-			}
+			},
+			// get_state(){
+			// 	const data={content:"111"};
+			// 	getData(data).then(res=>{
+			// 		console.log(res);
+			// 	});
+			// }
 		}
 	};
 </script>
-<style scoped lang="scss">
-	.swiper-container {
-		height: 0.6rem;
-	}
+
+<style scoped src="../assets/css/index.css">
+
 </style>
