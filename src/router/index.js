@@ -4,14 +4,21 @@ import Index from "../views/index.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Index",
     component: Index,
-	 meta: {
-			title: '首页入口'
-		  }
+    meta: {
+      title: '首页入口'
+    }
+  },
+  {
+    path: "/redPacket",
+    name: "redPacket",
+    component: () => import('@/views/redPacket/index.vue'),
+    meta: {
+      title: '收到的红包'
+    }
   },
   // {
   //   path: "/",
@@ -25,7 +32,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-mode:'history',
+  mode: 'hash',
   routes
 });
 

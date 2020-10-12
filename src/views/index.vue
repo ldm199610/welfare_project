@@ -11,13 +11,14 @@
 		</swiper>
 		<div class="swiper-scrollbar on"></div>
 		<div @click="copyFn()">点击复制</div>
+		<router-link to="redPacket" style="color:red">开红包点击跳转</router-link>
 	</div>
 </template>
 
 <script>
 	// @ is an alias to /src
 	// import HelloWorld from "@/components/HelloWorld.vue";
-	import {getData} from "../api/index";
+	// import {getData} from "../api/index";
 	export default {
 		name: "Index",
 		// components: {
@@ -37,7 +38,7 @@
 			}
 		},
 		mounted() {
-			this.getIndex_state();
+			// this.getIndex_state();
 		},
 		methods: {
 			copyFn() {
